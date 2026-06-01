@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>YouTube Downloader - Web App</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="background-glows">
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+  </div>
+
+  <main class="app-container">
+    <header class="app-header">
+      <div class="logo-area">
+        <svg class="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2L2 22H22L12 2Z" stroke="url(#logo-grad)" stroke-width="2.5" stroke-linejoin="round"/>
+          <path d="M12 17V8M12 17L8 13M12 17L16 13" stroke="url(#logo-grad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <defs>
+            <linearGradient id="logo-grad" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#6366f1" />
+              <stop offset="1" stop-color="#3b82f6" />
+            </linearGradient>
+          </defs>
+        </svg>
+        <h1>Web Video Downloader</h1>
+      </div>
+      <p class="subtitle">Descarga videos de YouTube en tu celular o PC al instante, sin apps ni registros.</p>
+    </header>
+
+    <section class="card glass">
+      <!-- Input URL -->
+      <div class="input-group">
+        <label for="video-url">Enlace del video</label>
+        <div class="input-wrapper">
+          <input type="text" id="video-url" placeholder="Pega el enlace de YouTube aquí..." autocomplete="off">
+          <button id="btn-paste" class="btn-secondary" title="Pegar enlace">
+            📋 Pegar
+          </button>
+          <button id="btn-clear" class="btn-icon" style="display: none;" title="Limpiar enlace">
+            ✕
+          </button>
+        </div>
+      </div>
+
+      <!-- Action Button -->
+      <button id="btn-download" class="btn-download-gradient" disabled>
+        Descargar Video
+      </button>
+
+      <!-- Status Message Info -->
+      <div id="status-panel" class="status-panel" style="display: none;">
+        <div class="spinner-row">
+          <div class="spinner"></div>
+          <span id="status-text">Procesando descarga en el servidor...</span>
+        </div>
+        <p class="status-help">El servidor está preparando el stream de video. En unos segundos, el navegador iniciará la descarga automáticamente.</p>
+      </div>
+
+      <div class="info-footer">
+        <div class="info-item">
+          <span class="info-icon">📱</span>
+          <span><strong>100% Mobile:</strong> Optimizado para cualquier celular Android o iOS.</span>
+        </div>
+        <div class="info-item">
+          <span class="info-icon">⚡</span>
+          <span><strong>Descarga Directa:</strong> El navegador maneja la descarga de forma nativa sin consumir la memoria RAM de tu celular.</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <p>Desplegable de forma gratuita en Render / Railway &bull; Docker Container</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
