@@ -57,15 +57,10 @@ document.addEventListener("DOMContentLoaded", () => {
     videoUrlInput.dispatchEvent(new Event("input"));
   });
 
-  // Fallback active community instances of Cobalt
+  // Fallback active community instances of Cobalt (v10 compliant and CORS enabled)
   const COBALT_ENDPOINTS = [
     "https://apicobalt.mgytr.top",
     "https://cobaltapi.kittycat.boo",
-    "https://api.qwkuns.me",
-    "https://cobalt.alpha.wolfy.love",
-    "https://melon.clxxped.lol",
-    "https://grapefruit.clxxped.lol",
-    "https://nuko-c.meowing.de",
     "https://dog.kittycat.boo",
     "https://fox.kittycat.boo"
   ];
@@ -94,18 +89,17 @@ document.addEventListener("DOMContentLoaded", () => {
       statusText.textContent = `Conectando con el servidor (${host})...`;
       
       try {
+        const payload = isMp3
+          ? { url: url, downloadMode: "audio", audioFormat: "mp3" }
+          : { url: url, videoQuality: quality };
+
         const response = await fetch(endpoint, {
           method: "POST",
           headers: {
             "Accept": "application/json",
             "Content-Type": "application/json"
           },
-          body: JSON.stringify({
-            url: url,
-            videoQuality: isMp3 ? undefined : quality,
-            isAudioOnly: isMp3,
-            audioFormat: isMp3 ? "mp3" : undefined
-          })
+          body: JSON.stringify(payload)
         });
 
         if (!response.ok) {
