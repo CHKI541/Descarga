@@ -58,42 +58,73 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Handle download trigger
-  btnDownload.addEventListener("click", () => {
+  btnDownload.addEventListener("click", async () => {
     const url = videoUrlInput.value.trim();
     if (!url) return;
 
     const format = videoFormatSelect.value;
-    const quality = videoQualitySelect.value;
+    const isMp3 = format === "mp3";
+    let quality = videoQualitySelect.value;
+    if (quality === "best") quality = "1080";
 
     // 1. Disable inputs to prevent duplicate download requests
     setUiLoadingState(true);
-
-    // 2. Build the API endpoint with URL, format, and quality parameters
-    const downloadApiUrl = `/api/download?url=${encodeURIComponent(url)}&format=${format}&quality=${quality}`;
-
-    // 3. Trigger native browser file download using a hidden anchor tag
-    // This allows the phone's native download manager to handle the stream
-    const link = document.createElement("a");
-    link.href = downloadApiUrl;
-    link.setAttribute("download", ""); // Request download behavior
-    link.style.display = "none";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-
-    // 4. Update status display text for user feedback
     statusText.textContent = "Conectando con el servidor...";
-    setTimeout(() => {
-      statusText.textContent = "Descargando archivo en segundo plano...";
-    }, 2500);
 
-    // 5. Restore UI control states after a safety timeout (10 seconds)
-    // to allow server-side buffering and download start
-    setTimeout(() => {
-      setUiLoadingState(false);
-      videoUrlInput.value = "";
-      videoUrlInput.dispatchEvent(new Event("input"));
-    }, 10000);
+    try {
+      // 2. Call Cobalt public API
+      const response = await fetch("https://api.cobalt.tools/", {
+        method: "POST",
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          url: url,
+          videoQuality: isMp3 ? undefined : quality,
+          isAudioOnly: isMp3,
+          audioFormat: isMp3 ? "mp3" : undefined
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error("Error en el servidor. Puede que el sitio no esté disponible.");
+      }
+
+      const data = await response.json();
+
+      if (data.url) {
+        statusText.textContent = "¡Listo! Iniciando descarga...";
+        
+        // 3. Trigger native browser file download
+        const link = document.createElement("a");
+        link.href = data.url;
+        link.setAttribute("download", ""); 
+        link.style.display = "none";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        // Clear input after success
+        setTimeout(() => {
+          videoUrlInput.value = "";
+          videoUrlInput.dispatchEvent(new Event("input"));
+        }, 1000);
+      } else if (data.text) {
+        throw new Error(data.text);
+      } else {
+        throw new Error("No se pudo obtener el enlace de descarga.");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Error al descargar: " + error.message);
+      statusText.textContent = "Ocurrió un error.";
+    } finally {
+      // 5. Restore UI control states
+      setTimeout(() => {
+        setUiLoadingState(false);
+      }, 1500);
+    }
   });
 
   // Helper to toggle form control elements during downloading states
