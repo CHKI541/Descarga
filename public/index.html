@@ -48,6 +48,28 @@
         </div>
       </div>
 
+      <!-- Configuration selectors (Format & Quality) -->
+      <div class="config-row">
+        <div class="input-group config-group">
+          <label for="video-format">Formato</label>
+          <select id="video-format" class="custom-select">
+            <option value="mp4">🎬 MP4 Video</option>
+            <option value="mp3">🎵 MP3 Audio</option>
+          </select>
+        </div>
+
+        <div id="quality-wrapper" class="input-group config-group">
+          <label for="video-quality">Calidad</label>
+          <select id="video-quality" class="custom-select">
+            <option value="best">Original (Mejor)</option>
+            <option value="1080">1080p Full HD</option>
+            <option value="720">720p HD</option>
+            <option value="480">480p SD</option>
+            <option value="360">360p</option>
+          </select>
+        </div>
+      </div>
+
       <!-- Action Button -->
       <button id="btn-download" class="btn-download-gradient" disabled>
         Descargar Video
