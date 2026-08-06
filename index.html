@@ -106,11 +106,18 @@
       <div class="bypass-container">
         <button id="btn-toggle-bypass" class="btn-toggle-settings">🚀 ¿Bloqueado por Techloq? Usar consola (Bypass 100%)</button>
         <div id="bypass-wrapper" class="settings-wrapper" style="display: none;">
+          <label class="settings-label">1. Comando para descargar el video:</label>
           <div class="code-box">
             <code id="bypass-code-text">&amp; "C:\Users\israe\.gemini\antigravity\yt-dlp.exe" --no-check-certificate -P "C:\Users\israe\Downloads" "[Enlace]"</code>
             <button id="btn-copy-bypass" class="btn-secondary">📋 Copiar</button>
           </div>
-          <p class="settings-help">Copia este comando y pégalo en una ventana de **PowerShell** en tu PC para descargar el video directamente sin pasar por filtros web.</p>
+          
+          <label class="settings-label" style="margin-top: 0.5rem;">2. Comando para actualizar yt-dlp:</label>
+          <div class="code-box">
+            <code id="bypass-update-text">&amp; "C:\Users\israe\.gemini\antigravity\yt-dlp.exe" --no-check-certificate -U</code>
+            <button id="btn-copy-update" class="btn-secondary">📋 Copiar</button>
+          </div>
+          <p class="settings-help">Copia cualquiera de estos comandos y pégalos en una ventana de **PowerShell** en tu PC para ejecutarlos directamente.</p>
         </div>
       </div>
 

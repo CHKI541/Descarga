@@ -517,6 +517,13 @@ input[type="text"]::placeholder {
   line-height: 1.35;
 }
 
+.settings-label {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+  margin-bottom: 0.1rem;
+}
+
 /* Bypass Console Layout */
 .bypass-container {
   margin-top: 0.2rem;

@@ -377,6 +377,31 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  const btnCopyUpdate = document.getElementById("btn-copy-update");
+  const bypassUpdateText = document.getElementById("bypass-update-text");
+
+  if (btnCopyUpdate && bypassUpdateText) {
+    btnCopyUpdate.addEventListener("click", async () => {
+      try {
+        const textToCopy = bypassUpdateText.textContent;
+        await navigator.clipboard.writeText(textToCopy);
+        
+        const oldText = btnCopyUpdate.textContent;
+        btnCopyUpdate.textContent = "✓ Copiado";
+        btnCopyUpdate.classList.add("ok");
+        
+        setTimeout(() => {
+          btnCopyUpdate.textContent = oldText;
+          btnCopyUpdate.classList.remove("ok");
+        }, 1500);
+      } catch (err) {
+        console.warn("Clipboard error:", err);
+        alert("No se pudo copiar automáticamente. Por favor selecciónalo y cópialo manualmente.");
+      }
+    });
+  }
+
+
   // ─────────────────────────────────────────────────────────
   // UI loading state helper
   // ─────────────────────────────────────────────────────────
