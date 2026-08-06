@@ -72,8 +72,20 @@
 
       <!-- Server status + refresh -->
       <div class="server-row">
-        <span id="server-status" class="server-badge ok">4 servidores listos</span>
-        <button id="btn-refresh" class="btn-refresh">🔄 Actualizar servidores</button>
+        <span id="server-status" class="server-badge ok">3 servidores listos</span>
+        <button id="btn-refresh" class="btn-refresh" title="Actualizar desde el repositorio">🔄 Actualizar servidores</button>
+      </div>
+
+      <!-- Custom Server Configuration -->
+      <div class="custom-server-container">
+        <button id="btn-toggle-custom" class="btn-toggle-settings">⚙️ Configurar servidor manual</button>
+        <div id="custom-server-wrapper" class="settings-wrapper" style="display: none;">
+          <div class="input-wrapper">
+            <input type="text" id="custom-server-url" placeholder="https://api.ejemplo.com" autocomplete="off">
+            <button id="btn-save-custom" class="btn-secondary">Guardar</button>
+          </div>
+          <p class="settings-help">Ingresa la dirección de un servidor Cobalt alternativo si los servidores públicos están bloqueados por tu filtro.</p>
+        </div>
       </div>
 
       <!-- Action Button -->
