@@ -336,7 +336,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const bypassCodeText    = document.getElementById("bypass-code-text");
   const btnCopyBypass     = document.getElementById("btn-copy-bypass");
 
-  const POWERSHELL_TEMPLATE = `& "C:\\Users\\israe\\.gemini\\antigravity\\yt-dlp.exe" --no-check-certificate -P "C:\\Users\\israe\\Downloads" "[URL]"`;
+  const POWERSHELL_TEMPLATE = `& "C:\\Users\\israe\\.gemini\\antigravity\\yt-dlp.exe" --no-check-certificate --cookies-from-browser chrome -P "C:\\Users\\israe\\Downloads" "[URL]"`;
 
   function updateBypassCommand() {
     if (!bypassCodeText) return;

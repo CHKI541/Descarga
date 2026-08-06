@@ -108,7 +108,7 @@
         <div id="bypass-wrapper" class="settings-wrapper" style="display: none;">
           <label class="settings-label">1. Comando para descargar el video:</label>
           <div class="code-box">
-            <code id="bypass-code-text">&amp; "C:\Users\israe\.gemini\antigravity\yt-dlp.exe" --no-check-certificate -P "C:\Users\israe\Downloads" "[Enlace]"</code>
+            <code id="bypass-code-text">&amp; "C:\Users\israe\.gemini\antigravity\yt-dlp.exe" --no-check-certificate --cookies-from-browser chrome -P "C:\Users\israe\Downloads" "[Enlace]"</code>
             <button id="btn-copy-bypass" class="btn-secondary">📋 Copiar</button>
           </div>
           
@@ -117,7 +117,8 @@
             <code id="bypass-update-text">&amp; "C:\Users\israe\.gemini\antigravity\yt-dlp.exe" --no-check-certificate -U</code>
             <button id="btn-copy-update" class="btn-secondary">📋 Copiar</button>
           </div>
-          <p class="settings-help">Copia cualquiera de estos comandos y pégalos en una ventana de **PowerShell** en tu PC para ejecutarlos directamente.</p>
+          <p class="settings-help">Copia cualquiera de estos comandos y pégalos en una ventana de **PowerShell** en tu PC.</p>
+          <p class="settings-help" style="color: #fbbf24; margin-top: 0.2rem;">⚠️ **Nota Importante:** Para descargar el video, debes **cerrar Chrome por completo** antes de ejecutar el comando de descarga. Esto permite que el programa lea tu sesión autorizada por Techloq y evite el bloqueo.</p>
         </div>
       </div>
 
