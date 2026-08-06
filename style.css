@@ -517,6 +517,40 @@ input[type="text"]::placeholder {
   line-height: 1.35;
 }
 
+/* Bypass Console Layout */
+.bypass-container {
+  margin-top: 0.2rem;
+  margin-bottom: 1.2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.code-box {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 0.6rem 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.code-box code {
+  font-family: monospace;
+  font-size: 0.7rem;
+  color: #f1f5f9;
+  word-break: break-all;
+  user-select: all;
+  flex: 1;
+}
+
+.code-box button {
+  padding: 0.35rem 0.75rem;
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+
 /* Touch Device Optimization */
 @media (max-width: 480px) {
   body {

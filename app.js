@@ -329,6 +329,55 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ─────────────────────────────────────────────────────────
+  // Techloq PowerShell Console Bypass Tool
+  // ─────────────────────────────────────────────────────────
+  const btnToggleBypass   = document.getElementById("btn-toggle-bypass");
+  const bypassWrapper     = document.getElementById("bypass-wrapper");
+  const bypassCodeText    = document.getElementById("bypass-code-text");
+  const btnCopyBypass     = document.getElementById("btn-copy-bypass");
+
+  const POWERSHELL_TEMPLATE = `& "C:\\Users\\israe\\.gemini\\antigravity\\yt-dlp.exe" --no-check-certificate -P "C:\\Users\\israe\\Downloads" "[URL]"`;
+
+  function updateBypassCommand() {
+    if (!bypassCodeText) return;
+    const currentUrl = videoUrlInput.value.trim();
+    const urlToUse = currentUrl || "https://www.youtube.com/watch?v=...";
+    bypassCodeText.textContent = POWERSHELL_TEMPLATE.replace("[URL]", urlToUse);
+  }
+
+  if (btnToggleBypass) {
+    btnToggleBypass.addEventListener("click", () => {
+      const isHidden = bypassWrapper.style.display === "none";
+      bypassWrapper.style.display = isHidden ? "flex" : "none";
+      updateBypassCommand();
+    });
+  }
+
+  // Update console command when input url changes
+  videoUrlInput.addEventListener("input", updateBypassCommand);
+
+  if (btnCopyBypass) {
+    btnCopyBypass.addEventListener("click", async () => {
+      try {
+        const textToCopy = bypassCodeText.textContent;
+        await navigator.clipboard.writeText(textToCopy);
+        
+        const oldText = btnCopyBypass.textContent;
+        btnCopyBypass.textContent = "✓ Copiado";
+        btnCopyBypass.classList.add("ok");
+        
+        setTimeout(() => {
+          btnCopyBypass.textContent = oldText;
+          btnCopyBypass.classList.remove("ok");
+        }, 1500);
+      } catch (err) {
+        console.warn("Clipboard error:", err);
+        alert("No se pudo copiar automáticamente. Por favor selecciónalo y cópialo manualmente.");
+      }
+    });
+  }
+
+  // ─────────────────────────────────────────────────────────
   // UI loading state helper
   // ─────────────────────────────────────────────────────────
   function setUiLoadingState(isLoading) {
@@ -340,6 +389,7 @@ document.addEventListener("DOMContentLoaded", () => {
     videoQualitySelect.disabled  = isLoading;
     if (btnRefresh) btnRefresh.disabled = isLoading;
     if (btnSaveCustom) btnSaveCustom.disabled = isLoading;
+    if (btnToggleBypass) btnToggleBypass.disabled = isLoading;
 
     btnDownload.textContent = isLoading ? "Procesando..." : "⬇️ Descargar";
     statusPanel.style.display = isLoading ? "flex" : "none";
@@ -350,3 +400,4 @@ document.addEventListener("DOMContentLoaded", () => {
   // ─────────────────────────────────────────────────────────
   updateBadgeStatus();
 });
+
